@@ -1,0 +1,32 @@
+{% extends 'user/base.html' %}
+
+{% block header %}
+
+Welcome to <span class="text-danger">Quikkly</span>
+
+{% endblock header %}
+
+{% block content %}
+
+<form method="POST" class="p-4 p-md-5 border rounded-3 bg-light">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        <input type="input" name="username" id="floatingInput" class="form-control">
+        <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" name="password" id="floatingPassword" class="form-control">
+        <label for="floatingPassword">Password</label>
+    </div>
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="" value="remember-me"> Remember me
+        </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign In</button>
+    <hr class="my-4">
+    <!-- <small class="text-muted">By clicking Sign up, you agree to the terms of use</small> -->
+    <small class="text-muted">Don't have an account? <a href="{% url 'register-sender' %}">Sign Up</a></small>
+</form>
+
+{% endblock content %}
