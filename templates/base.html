@@ -44,16 +44,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
+                <a href="/" class="nav-item nav-link active">Home</a>
+                {% if request.user.is_sender %}
+                <a href="{% url 'start-delivery' %}" class="nav-item nav-link">Start Delivery</a>
                 <!-- <a href="contact.html" class="nav-item nav-link">Register rider</a> -->
+                {% endif %}
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Delivery</a>
                     <div class="dropdown-menu fade-up m-0">
-                        <a href="price.html" class="dropdown-item text-danger">Active delivery</a>
-                        <a href="feature.html" class="dropdown-item text-danger">Delivery history</a>
-                        <a href="quote.html" class="dropdown-item text-danger">Delivery queue</a>
-                        <a href="team.html" class="dropdown-item text-danger">Rider queue</a>
+                        {% if request.user.is_sender %}
+                        <a href="{% url 'active-delivery' %}" class="dropdown-item text-danger">Active delivery</a>
+                        <a href="{% url 'delivery-history' %}" class="dropdown-item text-danger">Delivery history</a>
+                        {% elif request.user.is_superuser %}
+                        <a href="{% url 'delivery-queue' %}" class="dropdown-item text-danger">Delivery queue</a>
+                        {% elif request.user.is_rider %}
+                        <a href="{% url 'rider-queue' %}" class="dropdown-item text-danger">Rider queue</a>
+                        {% endif %}
                     </div>
                 </div>
                 
@@ -61,7 +67,9 @@
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{ request.user.username }}</a>
                     <div class="dropdown-menu fade-up m-0">
                         <a href="{% url 'logout' %}" class="dropdown-item text-danger">Logout</a>
+                        {% if request.user.is_sender %}
                         <a href="{% url 'start-delivery' %}" class="dropdown-item text-danger">Start delivery</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>

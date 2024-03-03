@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'user/base.html' %}
 {% load widget_tweaks %}
 
 {% block header %}
@@ -10,40 +10,31 @@ Create a Rider Account with <span class="text-danger">Quikkly</span>
 
 {% block content %}
 
-<div class="row">
-    <div class="col-md-6">
-        <div class="card mx-auto" style="width: 40rem;">
-            <!-- <img src="" alt="" class="card-img-top"> -->
-            <div class="card-body">
-                <h5 class="card-title mb-3">Register as a Rider</h5>
 
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Username</label>
-                        {% render_field form.username class="form-control" %}
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Email</label>
-                        {% render_field form.email class="form-control" %}
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Enter Password</label>
-                        {% render_field form.password1 class="form-control" %}
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-                        {% render_field form.password2 class="form-control" %}
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Register Rider</button>
-                </form>
-            </div>
+    <form method="POST" class="p-4 p-md-5 border rounded-3 bg-light">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            {% render_field form.username class="form-control" %}
         </div>
-    </div>
-</div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Email</label>
+            {% render_field form.email class="form-control" %}
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Enter Password</label>
+            {% render_field form.password1 class="form-control" %}
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+            {% render_field form.password2 class="form-control" %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register Rider</button>
+    </form>
+    
 
 {% endblock content %}

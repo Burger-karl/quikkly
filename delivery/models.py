@@ -6,7 +6,7 @@ from users.models import User
 class Delivery(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
     package_name = models.CharField(max_length=100)
-    package_image = models.ImageField(upload_to='images/')
+    # package_image = models.ImageField(upload_to='images/')
     pickup_address = models.CharField(max_length=255)
     recipient_name = models.CharField(max_length=100)
     recipient_phone = models.CharField(max_length=20)

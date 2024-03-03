@@ -3,7 +3,7 @@ from django.contrib import messages
 from .models import Delivery
 from .forms import StartDeliveryForm, AssignDeliveryForm
 from django.conf import settings
-# from payment.models import Payment
+from payment.models import Payment
 from users.models import User
 
 # Create your views here.
@@ -19,18 +19,18 @@ def start_delivery(request):
 
             pk = settings.PAYSTACK_PUBLIC_KEY
             amount = 3000
-        #     payment = Payment.objects.create(amount=amount, email=request.user.email, user=request.user)
-        #     payment.save()
+            payment = Payment.objects.create(amount=amount, email=request.user.email, user=request.user)
+            payment.save()
 
-        #     context = {
-        #         'payment':payment,
-        #         'paystack_pub_key':pk,
-        #         'amount_value':payment.amount_value(),
-        #         'amount':amount,
-        #         'var':var
-        #     }
-        #     return render(request, 'payment/make_payment.html', context)
-        # else:
+            context = {
+                'payment':payment,
+                'paystack_pub_key':pk,
+                'amount_value':payment.amount_value(),
+                'amount':amount,
+                'var':var
+            }
+            return render(request, 'payment/make_payment.html', context)
+        else:
             messages.warning(request, 'Something went wrong')
             return redirect('start-delivery')
     else:
