@@ -18,7 +18,7 @@ def start_delivery(request):
             request.session['delivery'] = var.pk
 
             pk = settings.PAYSTACK_PUBLIC_KEY
-            amount = 3000
+            amount = 1500
             payment = Payment.objects.create(amount=amount, email=request.user.email, user=request.user)
             payment.save()
 

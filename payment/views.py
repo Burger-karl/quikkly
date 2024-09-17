@@ -13,8 +13,8 @@ def verify_payment(request, ref):
         obj = Delivery.objects.get(pk=request.session['delivery'])
         obj.is_verified = True
         obj.save()
-        messages.success(request, 'Payment verified. A dispatch rider is coming soon')
+        messages.success(request, 'Payment verified. subscription done')
         return redirect('dashboard')
     else:
         messages.warning(request, 'Something went wrong with your payment, please try again')
-        return redirect('dashboard')
+        return redirect('dashboard') 
